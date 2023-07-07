@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Video</title>
+    <style>
+        body {
+            margin: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: auto;
+            background: linear-gradient(315deg, rgba(101, 0, 94, 1) 3%, rgba(60, 132, 206, 1) 38%, rgba(48, 238, 226, 1) 68%, rgba(255, 25, 25, 1) 98%);
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .wave {
+            background: rgb(255 255 255 / 25%);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes wave {
+            2% {
+                transform: translateX(1);
+            }
+
+            25% {
+                transform: translateX(-25%);
+            }
+
+            50% {
+                transform: translateX(-50%);
+            }
+
+            75% {
+                transform: translateX(-25%);
+            }
+
+            100% {
+                transform: translateX(1);
+            }
+        }
+
+        .container {
+            margin: auto;
+            margin-top: 150px;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            background-color: #ffffffef;
+            border-radius: 8px;
+            opacity: 2.4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button,input {
+            display: inline-block;
+            background-color: #0057b9d9;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .navbar {
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .navbar-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .navigation {
+            display: flex;
+        }
+
+        .navigation li {
+            list-style-type: none;
+            margin-left: 20px;
+        }
+
+        .navigation li a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a href="{{ url_for('home') }}" class="logo">Home</a>
+                <ul class="navigation">
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('detect') }}">Detect</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wave"></div>
+            <h1>Upload Video</h1>
+            <div class="wave"></div>
+            <form action="{{ url_for('run_video') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="videoFile" id="videoFile" accept="video/*">
+                <br>
+                <br>
+                <input type="submit" value="Upload" class="button">
+            </form>
+
+            <form action="{{ url_for('access_webcam') }}" method="get">
+                <button type="submit" class="button" id="#btn">Access Webcam</button>
+            </form>
+
+            <br>
+            <div class="wave"></div>
+        </div>
+    </div>
+</body>
+
+</html>
